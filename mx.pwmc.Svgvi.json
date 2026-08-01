@@ -1,7 +1,7 @@
 {
   "app-id": "mx.pwmc.Svgvi",
   "runtime": "org.gnome.Platform",
-  "runtime-version": "46",
+  "runtime-version": "50",
   "sdk": "org.gnome.Sdk",
   "command": "mx.pwmc.Svgvi",
   "finish-args": [
@@ -31,7 +31,20 @@
         {
           "type": "git",
           "url": "https://gitlab.gnome.org/GNOME/gxml.git",
-          "tag": "0.20.4"
+          "tag": "0.20.4",
+          "commit": "101eb887d6d656cdccd8866457f5448bebeddb14"
+        }
+      ]
+    },
+    {
+      "name": "gresg",
+      "buildsystem": "meson",
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://gitlab.com/gsvg/gresg.git",
+          "tag": "0.6.0",
+          "commit": "464e1b2c5313c4cd9e7efc521ac28ccd57588b0d"
         }
       ]
     },
@@ -42,18 +55,33 @@
         {
           "type": "git",
           "url": "https://gitlab.com/gsvg/gsvg.git",
-          "tag": "0.10.4"
+          "tag": "0.10.4",
+          "commit": "e53af0287b61f9780aeb8f3dcb6bd1c5245312f6"
         }
       ]
     },
     {
       "name": "gsvgtk",
       "buildsystem": "meson",
+      "config-opts": [
+        "-Ddocs=false",
+        "-Dtests=false"
+      ],
+      "build-options": {
+        "ldflags": "-lm"
+      },
       "sources": [
         {
           "type": "git",
           "url": "https://gitlab.com/gsvg/gsvgtk.git",
-          "tag": "0.11.0"
+          "tag": "0.14.1",
+          "commit": "8f5117bf712a0d08dcb0420059fc83f57bbb5e1f"
+        },
+        {
+          "type": "shell",
+          "commands": [
+            "sed -i \"/subdir('demo')/d\" src/meson.build"
+          ]
         }
       ]
     },
@@ -74,8 +102,13 @@
       "sources": [
         {
           "type": "git",
-          "url": "https://gitlab.com/pwmc/svgvi.git",
-          "tag": "2.0.3"
+          "url": "https://gitlab.com/gsvg/svgvi.git",
+          "tag": "2.0.5",
+          "commit": "4e2221bf2fcec035ce01494ac5caa3ca1e2f22e2"
+        },
+        {
+          "type": "patch",
+          "path": "fix_appdata.patch"
         }
       ]
     }
